@@ -1,7 +1,7 @@
 const roomName = "𝙵𝚞𝚝𝚜𝚊𝚕 𝚇𝟺 𝚄𝚁𝚄𝙽";
 const botName = "Juiz URUN";
 const maxPlayers = 18;
-const roomPublic = true;
+const roomPublic = false;
 const geo = [{
     "code": "br",
     "lat": -23.533773,
@@ -72,7 +72,7 @@ let blueTeamChoosed = [];
 
 var teams = [
 	{
-		teamName: "SKG",
+		teamName: "SK",
 		angle: 0,
 		avatarColor: 0x000000,
 		colors: [
@@ -80,7 +80,7 @@ var teams = [
 		]
 	},
   {
-    teamName: "SKG2",
+    teamName: "SK2",
     angle: 90,
     avatarColor: 0x000000,
     colors: [
@@ -304,7 +304,7 @@ let commands = new CommandList();
 /** COMMANDS */
 
 commands.add(new Command({
-    name: "clearbans",
+    name: "limparbans",
     desc: "Limpa todos os bans da sala.",
     alias: ["cb"],
     admin: true,
@@ -323,6 +323,26 @@ commands.add(new Command({
         room.kickPlayer(player.id, "tchau bobinha rs", false);
     }
 }));
+
+commands.add(new Command({
+	name: "senha",
+	alias: ["password"],
+	admin: true,
+	func: function(player, arg, message) {
+		code = message.substr(14)
+		room.sendAnnouncement(`${player.name} colocou uma senha à sala!`, null, AdminColor3, "bold")
+		room.setPassword(code);
+	}
+}))
+
+commands.add(new Command({
+	name: "limparsenha",
+	admin: true,
+	func: function(player) {
+		room.setPassword();
+		room.sendAnnouncement(`${player.name} limpou a senha da sala!`, null, AdminColor3, "bold")
+	}
+}))
 
 commands.add(new Command({
 	name: "pause",
@@ -351,7 +371,7 @@ commands.add(new Command({
 		
 		if (player.team == TEAMS.RED) {
 			room.pauseGame(pauseState = false);
-			room.sendAnnouncement(`${player.name} solicitou pausa para o time.`, null, AdminColor, "italic");
+			room.sendAnnouncement(`${player.name} despausou o jogo.`, null, AdminColor, "italic");
 		}
 	}
 }))
