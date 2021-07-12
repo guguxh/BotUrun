@@ -316,6 +316,13 @@ commands.add(new Command({
 }));
 
 commands.add(new Command({
+	name: "discord",
+	func: function(player) {
+		romm.sendAnnouncement("Entre no discord https://discord.gg/Muyh74sB2n", null, AdminColor3, "bold");
+	}
+}));
+
+commands.add(new Command({
     name: "bb",
     alias: ["tchau", "bye", "cya", "gn", "sair"],
     desc: "Tchauzinho linda",
@@ -333,7 +340,7 @@ commands.add(new Command({
 		room.sendAnnouncement(`${player.name} colocou uma senha à sala!`, null, AdminColor3, "bold")
 		room.setPassword(code);
 	}
-}))
+}));
 
 commands.add(new Command({
 	name: "limparsenha",
@@ -342,7 +349,7 @@ commands.add(new Command({
 		room.setPassword();
 		room.sendAnnouncement(`${player.name} limpou a senha da sala!`, null, AdminColor3, "bold")
 	}
-}))
+}));
 
 commands.add(new Command({
 	name: "pause",
@@ -358,7 +365,7 @@ commands.add(new Command({
 			room.sendAnnouncement(`${player.name} solicitou pausa para o time.`, null, AdminColor, "italic");
 		}
 	}
-}))
+}));
 
 commands.add(new Command({
 	name: "despausar",
@@ -374,7 +381,7 @@ commands.add(new Command({
 			room.sendAnnouncement(`${player.name} despausou o jogo.`, null, AdminColor, "italic");
 		}
 	}
-}))
+}));
 
 commands.add(new Command({
     name: "futsalx4",
@@ -726,6 +733,8 @@ function endGame(winner) { // no stopGame() function in it
 
 
 /* PLAYER FUNCTIONS */
+
+setInterval(function(){room.sendAnnouncement('Entre no discord do campeonato: https://discord.gg/Muyh74sB2n'); }, 60000);
 
 function updateTeams() {
     players = room.getPlayerList().filter((player) => player.id != 0);
